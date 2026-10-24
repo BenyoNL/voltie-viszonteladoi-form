@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voltie viszonteladói csatlakozás</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="bar"></div>
+<img class="brand" src="voltie-logo.png" alt="Voltie" width="98" height="45">
+<div id="stage"><div id="app"></div></div>
+<div class="nav"><button id="nav-up" aria-label="Előző kérdés">&#8593;</button><button id="nav-down" aria-label="Következő kérdés">&#8595;</button></div>
+<script src="questions.js"></script>
+<script src="engine.js"></script>
+<script>
+  var V = window.VOLTIE;
+  /* D ág (Viszonteladó, villanyszerelő partner), a közös belépő kérdés nélkül */
+  VoltieForm.start({
+    formId: 'viszontelado',
+    formVersion: 'voltie-viszontelado-v2-hu',
+    endpoint: '/api/viszontelado',
+    known: { endpoint: '/api/jelentkezo' },   // id-s linknél a MiniCRM-ben szereplő adatok megerősítése   // ÉLES: a server.js továbbítja a MiniCRM 69-es kategóriájába
+    supportEmail: 'toth.bence@voltie.eu',
+    hidden: V.HIDDEN,
+    welcome: {
+      promo: 'Voltie viszonteladói csatlakozás',
+      title: V.PROMO,
+      description: 'Csatlakozz a Voltie partnerhálózatához villanyszerelőként, viszonteladóként vagy ajánlóként. Néhány kérdéssel megismerünk, és hamarosan jelentkezünk.',
+      terms: V.TERMS,
+      time: '2-3 percet vesz igénybe'
+    },
+    questions: [].concat(V.CONTACT, V.D, [V.HEARD, V.NOTE], V.LEGAL, V.OFFER),
+    thanks: V.partnerThanks
+  });
+</script>
+</body>
+</html>

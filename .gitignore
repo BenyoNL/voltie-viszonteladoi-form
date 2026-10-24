@@ -1,0 +1,5 @@
+# Titkok és helyi fájlok: ezeket sosem szabad feltölteni
+.env
+logs/
+node_modules/
+urlap/index.html

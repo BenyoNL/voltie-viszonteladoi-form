@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voltie kapcsolatfelvétel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="bar"></div>
+<img class="brand" src="voltie-logo.png" alt="Voltie" width="98" height="45">
+<div id="stage"><div id="app"></div></div>
+<div class="nav"><button id="nav-up" aria-label="Előző kérdés">&#8593;</button><button id="nav-down" aria-label="Következő kérdés">&#8595;</button></div>
+<script src="questions.js"></script>
+<script src="engine.js"></script>
+<script>
+  var V = window.VOLTIE, R = V.ROUTER;
+
+  /* 1. közös belépő kérdés: ez dönti el az ágat. Ha a menüből ag=partner jön, előre kiválasztott és kimarad. */
+  var router = {
+    id: 'role', type: 'choice', required: true, title: 'Miben segíthetünk?',
+    choices: [R.home, R.company, R.condo, R.partner, R.tech, R.info],
+    showIf: function (a, h) { return h.ag !== 'partner'; }
+  };
+
+  var tail = {
+    heard: V.onlyFor([R.home, R.company, R.condo, R.partner, R.info], V.HEARD),
+    note: V.onlyFor([R.home, R.company, R.condo, R.partner], V.NOTE)
+  };
+
+  var questions = [router].concat(
+    V.CONTACT,
+    V.scope(R.home, V.A),
+    V.scope(R.company, V.B),
+    V.scope(R.condo, V.C),
+    V.scope(R.partner, V.D),
+    V.scope(R.tech, V.E),
+    V.scope(R.info, V.F),
+    [tail.heard, tail.note],
+    V.LEGAL,
+    V.scope(R.partner, V.OFFER)
+  );
+
+  VoltieForm.start({
+    formId: 'altalanos',
+    formVersion: 'altalanos-v1',
+    endpoint: '',   // DEMÓ: nem küld sehova, csak a böngésző konzolra naplóz
+    supportEmail: 'toth.bence@voltie.eu',
+    hidden: V.HIDDEN,
+    init: function (h) { return h.ag === 'partner' ? { role: R.partner } : {}; },
+    welcome: {
+      promo: 'Kapcsolatfelvétel a Voltie-val',
+      title: V.PROMO,
+      description: 'Ajánlatot kérsz, kérdésed van, vagy partnerként csatlakoznál? Pár kérdés, és a megfelelő kollégánk jelentkezik.',
+      terms: V.TERMS,
+      time: '1-3 percet vesz igénybe'
+    },
+    questions: questions,
+    thanks: function (a) {
+      if (a.role === R.partner) return V.partnerThanks(a);
+      return {
+        title: 'Köszönjük, megkaptuk!',
+        text: a.role === R.tech ? 'Műszaki csapatunk hamarosan jelentkezik.' : 'Hamarosan felvesszük veled a kapcsolatot.',
+        links: [{ label: 'Első lépések', href: V.QUICKSTART }]
+      };
+    }
+  });
+</script>
+</body>
+</html>

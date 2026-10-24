@@ -1,0 +1,47 @@
+{
+  "_help": "Az űrlap kérdés-azonosítója → MiniCRM technikai név (69-es kategória). A megengedett értékeket és típusokat a minicrm-69-mezok.json adja. A valueMap az űrlapon látható szöveget fordítja arra, ami a MiniCRM listában most szerepel.",
+  "fields": {
+    "legalform": "Cegforma",
+    "taxid": "Adoszam2",
+    "website": "Weboldal",
+    "activity": "Tevekenyseg",
+    "collab": "Villanyszerelo2",
+    "installed": "TelepitettMarAutotoltot",
+    "installed_count": "TelepitesiTapasztalat",
+    "brands": "TelepitettMarkak",
+    "counties": "DijmentesFelmeresMegyek",
+    "km": "KiszallasKmhatar",
+    "meevet": "MeeVetLink",
+    "team": "Csapat",
+    "design": "MuszakiTervezes",
+    "yearly": "N2026EvesRendelesiMennyiseg",
+    "heard": "HonnanHallottRolunk",
+    "note": "Megjegyzes3",
+    "company": "Ceg",
+    "install_scale": "TelepitestVallal"
+  },
+  "hidden": {
+    "utm_source": "Source2"
+  },
+  "valueMap": {
+    "Villanyszerelo2": {
+      "Telepítést vállalok": "Vállal telepítést",
+      "Villamos biztonsági felülvizsgálatot (VBF) végzek": "Villamosbiztonsági felülvizsgálat",
+      "Már telepítettem Voltie töltőt": "Már telepített nekünk",
+      "Töltőt értékesítek": "Készülék értékesítő",
+      "Regisztrált villanyszerelő vagyok": "Regisztrált villanyszerelő",
+      "Minősített regisztrált szerelő vagyok": "Minősített regisztrált szerelő",
+      "Ajánlóként, jutalékért": "Jutalékos"
+    }
+  },
+  "statusIds": {
+    "new": 3567,
+    "installed": 3560,
+    "notInstalled": 3550,
+    "foreign": 3719,
+    "imported": 3809,
+    "voltieInstaller": 3638,
+    "resellerOnly": 3694,
+    "installerReseller": 3604
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "_leiras": "MiniCRM Viszonteladók + villanyszerelők (CategoryId 69) mezői a partner kérdőívhez. A bal oldali kulcsok javaslatok; a program saját kérdés-azonosítóihoz igazítsd. Lista és többválasztós mezőnél csak a megadott értékek egyikét (pontos szöveggel) szabad küldeni. Ellenőrizve: MiniCRM séma, 2026.10.22.",
+  "CategoryId": 69,
+  "StatusIds": {
+    "Bejövő email (új jelentkező)": 3567,
+    "Már telepített autótöltőt": 3560,
+    "Nem telepített még": 3550,
+    "Külföldi viszonteladó": 3719,
+    "Régi jelentkező, kérdőív kiküldve": 3809
+  },
+  "mezok": [
+    {
+      "kerdes_kulcs": "contact_firstname",
+      "hova": "Kontakt (személy)",
+      "technikai_nev": "FirstName",
+      "leiras": "Keresztnév",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "contact_lastname",
+      "hova": "Kontakt (személy)",
+      "technikai_nev": "LastName",
+      "leiras": "Vezetéknév",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "email",
+      "hova": "Kontakt (személy)",
+      "technikai_nev": "Email",
+      "leiras": "E-mail",
+      "tipus": "Email"
+    },
+    {
+      "kerdes_kulcs": "phone",
+      "hova": "Kontakt (személy)",
+      "technikai_nev": "Phone",
+      "leiras": "Telefon",
+      "tipus": "Phone"
+    },
+    {
+      "kerdes_kulcs": "taxid",
+      "hova": "Cég kontakt + adatlap",
+      "technikai_nev": "VatNumber (cég) és Adoszam2 (adatlap)",
+      "leiras": "Adószám; a cégnevet és címet a MiniCRM Céginfó tölti a VatNumber alapján",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "website",
+      "hova": "Cég kontakt + adatlap",
+      "technikai_nev": "Url (cég) és Weboldal (adatlap)",
+      "leiras": "Weboldal",
+      "tipus": "Url"
+    },
+    {
+      "kerdes_kulcs": "company_form",
+      "hova": "Adatlap",
+      "technikai_nev": "Cegforma",
+      "leiras": "Vállalkozási forma",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "activity",
+      "hova": "Adatlap",
+      "technikai_nev": "Tevekenyseg",
+      "leiras": "Mivel foglalkozol? (több választható)",
+      "tipus": "Többválasztós",
+      "ertekek": [
+        "Villanyszerelés",
+        "EV töltő értékesítés / Elektromos nagykereskedés",
+        "Napelem telepítés",
+        "Elektromos tervezés/kivitelezés",
+        "Autókereskedés",
+        "Generálkivitelezés",
+        "Egyéb"
+      ]
+    },
+    {
+      "kerdes_kulcs": "cooperation",
+      "hova": "Adatlap",
+      "technikai_nev": "Villanyszerelo2",
+      "leiras": "Milyen formában dolgoznál velünk? (több választható)",
+      "tipus": "Többválasztós",
+      "ertekek": [
+        "Vállal telepítést",
+        "Villamosbiztonsági felülvizsgálat",
+        "Már telepített nekünk",
+        "Készülék értékesítő",
+        "Regisztrált villanyszerelő",
+        "Minősített regisztrált szerelő",
+        "Jutalékos"
+      ]
+    },
+    {
+      "kerdes_kulcs": "installed_before",
+      "hova": "Adatlap",
+      "technikai_nev": "TelepitettMarAutotoltot",
+      "leiras": "Telepítettél már autótöltőt? Igen → StatusId 3560, Nem → StatusId 3550",
+      "tipus": "Lista (egy érték)",
+      "ertekek": [
+        "Igen",
+        "Nem"
+      ]
+    },
+    {
+      "kerdes_kulcs": "installed_count",
+      "hova": "Adatlap",
+      "technikai_nev": "TelepitesiTapasztalat",
+      "leiras": "Hány autótöltőt telepítettél?",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "installed_voltie",
+      "hova": "Adatlap",
+      "technikai_nev": "Villanyszerelo2",
+      "leiras": "Ha Igen: a „Már telepített nekünk” értéket is be kell jelölni",
+      "tipus": "Többválasztós",
+      "ertekek": [
+        "Vállal telepítést",
+        "Villamosbiztonsági felülvizsgálat",
+        "Már telepített nekünk",
+        "Készülék értékesítő",
+        "Regisztrált villanyszerelő",
+        "Minősített regisztrált szerelő",
+        "Jutalékos"
+      ]
+    },
+    {
+      "kerdes_kulcs": "brands",
+      "hova": "Adatlap",
+      "technikai_nev": "TelepitettMarkak",
+      "leiras": "Milyen márkákat telepítettél? (több választható)",
+      "tipus": "Többválasztós",
+      "ertekek": [
+        "Voltie",
+        "Wallbox",
+        "ABB",
+        "Schneider Electric",
+        "Zaptec",
+        "Easee",
+        "Tesla",
+        "Alfen",
+        "Egyéb"
+      ]
+    },
+    {
+      "kerdes_kulcs": "counties",
+      "hova": "Adatlap",
+      "technikai_nev": "DijmentesFelmeresMegyek",
+      "leiras": "Megyék díjmentes kiszállással (több választható)",
+      "tipus": "Többválasztós",
+      "ertekek": [
+        "Budapest",
+        "Bács-Kiskun",
+        "Baranya",
+        "Békés",
+        "Borsod-Abaúj-Zemplén",
+        "Csongrád-Csanád",
+        "Fejér",
+        "Győr-Moson-Sopron",
+        "Hajdú-Bihar",
+        "Heves",
+        "Jász-Nagykun-Szolnok",
+        "Komárom-Esztergom",
+        "Nógrád",
+        "Pest",
+        "Somogy",
+        "Szabolcs-Szatmár-Bereg",
+        "Tolna",
+        "Vas",
+        "Veszprém",
+        "Zala"
+      ]
+    },
+    {
+      "kerdes_kulcs": "max_km",
+      "hova": "Adatlap",
+      "technikai_nev": "KiszallasKmhatar",
+      "leiras": "Hány km-ig mész ki? (szám)",
+      "tipus": "Szám"
+    },
+    {
+      "kerdes_kulcs": "mee_vet",
+      "hova": "Adatlap",
+      "technikai_nev": "MeeVetLink",
+      "leiras": "MEE VET link",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "team_size",
+      "hova": "Adatlap",
+      "technikai_nev": "Csapat",
+      "leiras": "Csapat létszáma",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "design",
+      "hova": "Adatlap",
+      "technikai_nev": "MuszakiTervezes",
+      "leiras": "Műszaki tervezés, igénybejelentés (Igen / Nem)",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "yearly_volume",
+      "hova": "Adatlap",
+      "technikai_nev": "N2026EvesRendelesiMennyiseg",
+      "leiras": "Éves volumen (szám)",
+      "tipus": "Szám"
+    },
+    {
+      "kerdes_kulcs": "source",
+      "hova": "Adatlap",
+      "technikai_nev": "HonnanHallottRolunk",
+      "leiras": "Hol hallottál rólunk? (több választható)",
+      "tipus": "Többválasztós",
+      "ertekek": [
+        "Google kereső",
+        "Facebook",
+        "Instagram",
+        "YouTube",
+        "TikTok",
+        "LinkedIn",
+        "Ismerős ajánlotta",
+        "Villanyszerelő ajánlotta",
+        "Autókereskedés",
+        "Tartalomgyártó",
+        "Egyéb"
+      ]
+    },
+    {
+      "kerdes_kulcs": "note",
+      "hova": "Adatlap",
+      "technikai_nev": "Megjegyzes3",
+      "leiras": "Megjegyzés",
+      "tipus": "Hosszú szöveg"
+    },
+    {
+      "kerdes_kulcs": "marketing",
+      "hova": "Adatlap",
+      "technikai_nev": "MarketingHozzajarulas2",
+      "leiras": "Marketing hozzájárulás",
+      "tipus": "Lista (egy érték)",
+      "ertekek": [
+        "Hozzájárulok a marketing célú megkereséshez",
+        "Nem járulok hozzá"
+      ]
+    },
+    {
+      "kerdes_kulcs": "lang",
+      "hova": "Adatlap",
+      "technikai_nev": "Nyelv3",
+      "leiras": "HU / EN",
+      "tipus": "Lista (egy érték)",
+      "ertekek": [
+        "HU",
+        "EN"
+      ]
+    },
+    {
+      "kerdes_kulcs": "country",
+      "hova": "Adatlap",
+      "technikai_nev": "Orszag3",
+      "leiras": "ISO kód, alapértelmezés HU; nem HU esetén StatusId 3719",
+      "tipus": "Lista (egy érték)",
+      "ertekek": [
+        "AT",
+        "BE",
+        "CH",
+        "CZ",
+        "DE",
+        "FR",
+        "GB",
+        "HR",
+        "HU",
+        "LT",
+        "MD",
+        "ME",
+        "PL",
+        "RO",
+        "SA",
+        "SI",
+        "SK",
+        "NL",
+        "SE",
+        "NO",
+        "FI",
+        "DK",
+        "GB",
+        "FR",
+        "ES",
+        "IT",
+        "RS",
+        "GR",
+        "TR"
+      ]
+    },
+    {
+      "kerdes_kulcs": "utm_source",
+      "hova": "Adatlap",
+      "technikai_nev": "Source2",
+      "leiras": "utm_source",
+      "tipus": "Szöveg"
+    },
+    {
+      "kerdes_kulcs": "all_answers",
+      "hova": "Adatlap",
+      "technikai_nev": "OsszesValasz2",
+      "leiras": "Minden válasz „Kérdés: válasz” sorokban (ez legyen a MINICRM_NOTE_FIELD)",
+      "tipus": "Hosszú szöveg"
+    },
+    {
+      "kerdes_kulcs": "install_scale",
+      "hova": "Adatlap",
+      "technikai_nev": "TelepitestVallal",
+      "leiras": "Hány töltő telepítését vállalod egy projekten? (több választható)",
+      "tipus": "Többválasztós",
+      "ertekek": [
+        "1-2 tötő",
+        "3-5 töltő",
+        "6-10 töltő",
+        "11-20 töltő",
+        "Bármennyit"
+      ]
+    }
+  ]
+}

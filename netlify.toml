@@ -1,0 +1,49 @@
+# Voltie űrlapok Netlify-on: statikus oldal (urlap/) + két háttérfüggvény (netlify/functions/)
+[build]
+  publish = "urlap"
+  # a főoldal a viszonteladói űrlap lesz (a link: https://<oldalad>.netlify.app/?id=...)
+  command = "cp urlap/viszontelado.html urlap/index.html"
+
+# A MiniCRM rendszer- és felhasználói azonosító nem titok (minden MiniCRM címben szerepel), ezért a titokkereső ne akadjon fenn rajtuk.
+# Az API kulcsot (MINICRM_API_KEY) továbbra is védi a titokkereső.
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "MINICRM_USER,MINICRM_USER_ID,MINICRM_SYSTEM_ID,MINICRM_CATEGORY_ID"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  # a pdfkit saját adatfájlokat olvas, ezért nem csomagoljuk össze
+  external_node_modules = ["pdfkit"]
+  # az ajánlat PDF betűi és logói
+  included_files = ["assets/**"]
+
+[[redirects]]
+  from = "/api/viszontelado"
+  to = "/.netlify/functions/viszontelado"
+  status = 200
+
+[[redirects]]
+  from = "/api/cegnev"
+  to = "/.netlify/functions/cegnev"
+  status = 200
+
+[[redirects]]
+  from = "/api/jelentkezo"
+  to = "/.netlify/functions/jelentkezo"
+  status = 200
+
+[[redirects]]
+  from = "/api/verzio"
+  to = "/.netlify/functions/viszontelado"
+  status = 200
+
+[[redirects]]
+  from = "/api/ajanlat"
+  to = "/.netlify/functions/ajanlat"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
