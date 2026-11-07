@@ -196,13 +196,16 @@ window.VOLTIE = (function () {
     var d = a._display || {};
     var dlm = /^25%/.test(a.offer || '') ? a.dlm1 : /^40%/.test(a.offer || '') ? a.dlm : '';
     var wants = /^(40|25)%/.test(a.offer || '');
+    /* id-s linknél a szerver a MiniCRM-ből egészíti ki az e-mailt/telefont (a böngésző csak maszkolva kapta) */
+    var leadId = '';
+    try { leadId = new URLSearchParams(location.search).get('id') || ''; } catch (e) { leadId = ''; }
     var links = [];
     if (wants) {
       links.push({
         label: 'Letöltöm az ajánlatot',
         download: {
           endpoint: '/api/ajanlat', filename: 'Voltie-ajanlat.pdf',
-          body: { company: a.company || d.company || '', taxid: a.taxid || d.taxid || '', name: ((a.lastname || '') + ' ' + (a.firstname || '')).trim() || d.name || '', email: a.email || '', phone: a.phone || '', offer: a.offer, dlm: dlm }
+          body: { company: a.company || d.company || '', taxid: a.taxid || d.taxid || '', name: ((a.lastname || '') + ' ' + (a.firstname || '')).trim() || d.name || '', email: a.email || '', phone: a.phone || '', offer: a.offer, dlm: dlm, id: leadId }
         }
       });
     }

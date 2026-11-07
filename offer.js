@@ -92,7 +92,7 @@ function buildOffer(input) {
     doc.image(A('voltie_logo_2026_black.png'), M, 44, { width: logoW });
     doc.rect(M, 86, logoW, 2).fill('#00FFFF');
     doc.rect(M + logoW, 86, CW - logoW, 2).fill('#000000');
-    doc.fillColor(LIGHT).font('S').fontSize(8).text('ÁJÁNLAT', M, 42, { width: CW, align: 'right', characterSpacing: 1.2 });
+    doc.fillColor(LIGHT).font('S').fontSize(8).text('AJÁNLAT', M, 42, { width: CW, align: 'right', characterSpacing: 1.2 });
     doc.fillColor(GREY).font('R').fontSize(9).text('Kelt: ' + dotted(now), M, 56, { width: CW, align: 'right' });
     doc.text('Érvényes: ' + dotted(until).replace(/\.$/, '') + '-ig', M, 69, { width: CW, align: 'right' });
 
@@ -155,7 +155,7 @@ function buildOffer(input) {
     doc.font('B').fontSize(14).text(ft(gross), M, y + 9, { width: CW - 14, align: 'right' });
     y += 34 + 20;
 
-    /* érvényesség: 1 hét */
+    /* érvényesség: VALID_MONTHS naptári hónap (a feltételek szövege ezzel egyezik) */
     const pill = 'Az ajánlat érvényessége: ' + long(until);
     doc.font('M').fontSize(9.5);
     const pw = doc.widthOfString(pill) + 28;
