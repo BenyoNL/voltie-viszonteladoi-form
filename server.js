@@ -39,6 +39,7 @@ async function handleReseller(req, res) {
 }
 
 async function handleOffer(req, res) {
+  if (limited(req.socket.remoteAddress || '')) return send(res, 429, { error: 'Túl sok kérés' });
   const d = await readJson(req, res, 5000);
   if (!d) return;
   const { buffer, fileName } = await core.makeOffer(d);

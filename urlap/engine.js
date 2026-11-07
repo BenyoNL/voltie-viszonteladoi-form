@@ -114,17 +114,22 @@
     var trail = [];          // már megtett kérdés-azonosítók (visszalépéshez)
     var current = null;      // aktuális kérdés
     var busy = false;
+    /* Honeypot: láthatatlan mező (a CSS .hp osztálya elrejti). A valódi weboldal-válasz az answers.website-ban van;
+       a szerver a payload.website mezőt figyeli, és kitöltés esetén botnak tekinti a kérést. */
+    var honeypot = h('input', { class: 'hp', name: 'website', type: 'text', tabindex: '-1', autocomplete: 'off', 'aria-hidden': 'true' });
+    document.body.appendChild(honeypot);
 
+    function isShown(q) {
+      if (answers._confirmed && answers._known && answers._known[q.id]) return false;   // a megerősített adatot nem kérdezzük újra
+      return !q.showIf || q.showIf(answers, hidden);
+    }
     function visible() {
-      return cfg.questions.filter(function (q) {
-        if (answers._confirmed && answers._known && answers._known[q.id]) return false;   // a megerősített adatot nem kérdezzük újra
-        return !q.showIf || q.showIf(answers, hidden);
-      });
+      return cfg.questions.filter(isShown);
     }
     function progress() {
       var v = visible();
       var idx = current ? v.indexOf(current) : v.length;
-      bar.style.width = Math.max(0, Math.min(100, (idx / v.length) * 100)) + '%';
+      bar.style.width = Math.max(0, Math.min(100, (idx / Math.max(v.length, 1)) * 100)) + '%';
     }
     function swap(node) {
       app.innerHTML = '';
@@ -192,6 +197,18 @@
     function advance() {
       var v = visible();
       var i = v.indexOf(current);
+      /* Ha az aktuális kérdés már nem tartozik az ághoz (visszalépés után megváltozott egy elágazó válasz),
+         a trail utolsó még látható kérdésétől folytatjuk, ne ugorjunk a lista elejére. */
+      if (i < 0) {
+        var start = 0;
+        for (var t = trail.length - 1; t >= 0; t--) {
+          var ti = v.indexOf(trail[t]);
+          if (ti >= 0) { start = ti + 1; break; }
+        }
+        var resume = v[start];
+        resume ? go(resume) : finish();
+        return;
+      }
       var nxt = v[i + 1];
       nxt ? go(nxt) : finish();
     }
@@ -378,7 +395,13 @@
     });
     navUp.addEventListener('click', function () {
       if (busy) return;
-      var prev = trail.pop();
+      /* A trailből kihagyjuk azokat a kérdéseket, amelyek a mostani válaszok szerint már nem látszanak
+         (pl. „Telepítettél már?" Nem-re váltása után a márkák kérdését). */
+      var prev = null;
+      while (trail.length) {
+        var cand = trail.pop();
+        if (isShown(cand)) { prev = cand; break; }
+      }
       prev ? go(prev, true) : welcome();
     });
     navDown.addEventListener('click', function () { if (current && !busy) current._next(); });
@@ -395,7 +418,7 @@
           if (q.type !== 'statement' && answers[q.id] != null) o[q.id] = { title: q.title, value: answers[q.id] };
           return o;
         }, {}),
-        website: '' // honeypot, a szerver eldobja, ha kitöltik
+        website: (honeypot && honeypot.value) || '' // honeypot: ha egy bot kitölti, a szerver eldobja
       };
       if (!cfg.endpoint) {
         console.info('[Voltie űrlap – DEMÓ, nem küldi sehova]', payload);
